@@ -1,0 +1,6 @@
+[package]
+name = "x_bird"
+version = "0.1.0"
+authors = ["Andrey Tyukavin <geotyukavin@gmail.com>"]
+
+[dependencies]
