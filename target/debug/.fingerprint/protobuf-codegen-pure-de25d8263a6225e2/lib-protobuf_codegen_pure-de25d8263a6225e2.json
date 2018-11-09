@@ -1,0 +1,1 @@
+{"rustc":12235846850856590500,"features":"[]","target":9037570451814619459,"profile":7282077418741342047,"path":7237453458167599600,"deps":[["protobuf v2.1.4","protobuf",8216564035068589962],["protobuf-codegen v2.1.4","protobuf_codegen",12108064596505010304]],"local":[{"Precalculated":"2.1.4"}],"rustflags":[],"edition":"Edition2015"}

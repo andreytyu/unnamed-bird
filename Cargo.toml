@@ -1,6 +1,10 @@
 [package]
-name = "x_bird"
+name = "unnamed_bird"
 version = "0.1.0"
 authors = ["Andrey Tyukavin <geotyukavin@gmail.com>"]
 
 [dependencies]
+osmpbfreader = "0.12.0"
+petgraph = "0.4.13"
+log = "0.4.6"
+env_logger = "*"
