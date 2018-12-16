@@ -1,55 +1,58 @@
 //#[macro_use]
 extern crate osmpbfreader;
-//extern crate petgraph;
-//use petgraph::Graph;
+extern crate petgraph;
+use petgraph::Graph;
 extern crate log;
 extern crate env_logger;
 
 fn count<F: Fn(&osmpbfreader::Tags) -> bool>(filter: F, filename: &std::ffi::OsStr) {
+
+    
+
     let r = std::fs::File::open(&std::path::Path::new(filename)).unwrap();
     let mut pbf = osmpbfreader::OsmPbfReader::new(r);
     let objs = pbf.get_objs_and_deps(|obj| filter(obj.tags())).unwrap();
-    let mut nb_nodes = 0;
-    let mut sum_lon = 0.;
-    let mut sum_lat = 0.;
-    let mut nb_ways = 0;
-    let mut nb_way_nodes = 0;
+
+    let mut osm_graph = Graph::<&i64, &i64>::new();
+    //let mut nb_nodes = 0;
+    //let mut sum_lon = 0.;
+    //let mut sum_lat = 0.;
+    //let mut nb_ways = 0;
+    //let mut nb_way_nodes = 0;
     let mut nb_rels = 0;
-    let mut nb_rel_refs = 0;
+    //let mut nb_rel_refs = 0;
     for obj in objs.values() {
         //info!("{:?}", obj);
         match *obj {
             osmpbfreader::OsmObj::Node(ref node) => {
-                nb_nodes += 1;
-                sum_lon += node.lon();
-                sum_lat += node.lat();
+                
+                osm_graph.add_node(&node.id.0);
+                
             }
             osmpbfreader::OsmObj::Way(ref way) => {
-                nb_ways += 1;
-                nb_way_nodes += way.nodes.len();
+                //nb_ways += 1;
+                //nb_way_nodes += way.nodes.len();
+                println!(
+                "way {:?}.",
+                way.nodes);
+                for vertice in &way.nodes {
+                        println!("node {:?}.",vertice.0 + 2)
+                }
+                break
             }
             osmpbfreader::OsmObj::Relation(ref rel) => {
                 nb_rels += 1;
-                nb_rel_refs += rel.refs.len();
+                //nb_rel_refs += rel.refs.len();
             }
+
+            
         }
     }
-    println!(
-        "{} nodes, mean coord: {}, {}.",
-        nb_nodes,
-        sum_lat / nb_nodes as f64,
-        sum_lon / nb_nodes as f64
-    );
-    println!(
-        "{} ways, mean |nodes|: {}",
-        nb_ways,
-        nb_way_nodes as f64 / nb_ways as f64
-    );
-    println!(
-        "{} relations, mean |references|: {}",
-        nb_rels,
-        nb_rel_refs as f64 / nb_rels as f64
-    );
+
+    //println!(
+    //            "graph {:?}.",
+    //            osm_graph);
+
 }
 
 fn main() {

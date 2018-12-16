@@ -1,1 +1,0 @@
-{"rustc":12235846850856590500,"features":"[\"default\", \"graphmap\", \"ordermap\", \"stable_graph\"]","target":5184048414018478020,"profile":7990393541957723157,"path":10126952840608825061,"deps":[["fixedbitset v0.1.9","fixedbitset",3287025499446417603],["ordermap v0.3.5","ordermap",820794506973596703]],"local":[{"Precalculated":"0.4.13"}],"rustflags":[],"edition":"Edition2015"}
